@@ -1,125 +1,41 @@
-create or replace PROCEDURE "UPDATE_CAMPAIGN_STATS" 
+create or replace PROCEDURE "UPDATE_ALL_SMS_RATES" 
 AS
-    CAMP_STAT_SEQ              NUMBER;
-    CUR_DATE                   DATE;
-    CAMPAINS_LAST_STATS_DATE   DATE;
-    V_EXCEPTION_MESSAGE        VARCHAR2 (4000);
-    CAMP_IS_OPEN_ENDED            NUMBER;
-    CURSOR CAMP_STATS IS
-          SELECT HDCS.CAMPAIGN_ID,
-                 HDCS.START_TIME,
-                 HDCS.END_TIME,
-                 SUM (HDCS.SENT)            CAMP_SENT,
-                 SUM (HDCS.DELIVERED)       CAMP_DELIVERED,
-                 SUM (HDCS.FAILED)          CAMP_FAILED,
-                 HDCS.RATE,
-                 SUM (HDCS.TOTAL_COUNT)     TOTAL_COUNT
-            FROM H_DAILY_CAMPAIGN_STATISTICS HDCS
-           WHERE HDCS.CAMPAIGN_ID IN
-                     (SELECT DISTINCT HSMS.CAMPAIGN_ID
-                        FROM H_SMS HSMS
-                       WHERE TRUNC (HSMS.HISTORY_DATE) = TRUNC (SYSDATE) --SELECT DISTINCT HDCS.CAMPAIGN_ID
-                                                                        -- FROM NDP_TST.H_DAILY_CAMPAIGN_STATISTICS HDCS
-                                                                        -- WHERE TRUNC (HDCS.STATS_DATE) = TRUNC (SYSDATE)
-                                                                        -- BETWEEN TO_DATE('2019-08-12', 'YYYY-MM-DD') AND TO_DATE('2019-08-15', 'YYYY-MM-DD')
-                                                                        )
-        GROUP BY HDCS.CAMPAIGN_ID,
-                 HDCS.START_TIME,
-                 HDCS.END_TIME,
-                 HDCS.SENT,
-                 HDCS.RATE;
+    CURSOR RUNNING_CAMPAIGN_IDS IS
+        SELECT CAMPAIGN_ID from ADM_CAMPAIGNS WHERE STATUS IN(10,11);--RUNNING, ENQUEUED
+        
+    AVERAGE_RATE_PERIOD NUMBER;
+
+    V_EXCEPTION_MESSAGE      VARCHAR2 (4000);
+        CAMP_IS_OPEN_ENDED            NUMBER;
 BEGIN
-    WITH
-        X
-        AS
-            (  SELECT HDCS.CAMPAIGN_ID,
-                      TRUNC (HDCS.STATS_DATE)
-                          MAX_STATS_DATE,
-                      RANK ()
-                          OVER (PARTITION BY CAMPAIGN_ID
-                                ORDER BY STATS_DATE DESC)
-                          STATS_DATE_RANK
-                 FROM H_DAILY_CAMPAIGN_STATISTICS HDCS
-                WHERE HDCS.CAMPAIGN_ID IN
-                          (SELECT DISTINCT CAMPAIGN_ID
-                             FROM H_SMS
-                            WHERE TRUNC (HISTORY_DATE) = TRUNC (SYSDATE))
-             ORDER BY HDCS.CAMPAIGN_ID DESC)
-    SELECT MIN (MAX_STATS_DATE)
-      INTO CAMPAINS_LAST_STATS_DATE
-      FROM X
-     WHERE STATS_DATE_RANK = 1;
+    SELECT CAST(VALUE as NUMBER) INTO  AVERAGE_RATE_PERIOD 
+    from ADM_SYSTEM_PROPERTIES 
+    WHERE GROUP_NAME = 'CAMPAIGN_STATS' 
+        AND KEY = 'AVERAGE_RATE_CALC_PERIOD';
 
-    CUR_DATE := CAMPAINS_LAST_STATS_DATE;
-
-    WHILE CUR_DATE < TRUNC (SYSDATE)
+    FOR CAMP_ID IN RUNNING_CAMPAIGN_IDS
     LOOP
-        UPDATE_DAILY_CAMPAIGN_STATS (CUR_DATE);
-        CUR_DATE := CUR_DATE + 1;
-    END LOOP;
-
-    UPDATE_DAILY_CAMPAIGN_STATS (NULL);
-
-
-    FOR REC IN CAMP_STATS
-    LOOP
-        BEGIN
-            CAMP_STAT_SEQ := CAMPAIGNS_STAT_SEQ.NEXTVAL;
-
-            MERGE INTO H_CAMPAIGN_STATISTICS C
-                 USING DUAL
-                    ON (CAMPAIGN_ID = REC.CAMPAIGN_ID)
-            WHEN MATCHED
-            THEN
-                UPDATE SET SENT = REC.CAMP_SENT,
-                           DELIVERED = REC.CAMP_DELIVERED,
-                           FAILED = REC.CAMP_FAILED
-                           --RATE = REC.RATE
-                           --TOTAL_COUNT = REC.TOTAL_COUNT --Commented By Mina
-            WHEN NOT MATCHED
-            THEN
-                INSERT     (ID,
-                            CAMPAIGN_ID,
-                            START_TIME,
-                            END_TIME,
-                            SENT,
-                            DELIVERED,
-                            FAILED,
-                            --RATE
-                            TOTAL_COUNT
-                            )
-                    VALUES (CAMP_STAT_SEQ,
-                            REC.CAMPAIGN_ID,
-                            REC.START_TIME,
-                            REC.END_TIME,
-                            REC.CAMP_SENT,
-                            REC.CAMP_DELIVERED,
-                            REC.CAMP_FAILED,
-                            --REC.RATE,
-                            REC.TOTAL_COUNT
-                            );
-            SELECT IS_OPEN_ENDED INTO CAMP_IS_OPEN_ENDED FROM ADM_CAMPAIGNS WHERE CAMPAIGN_ID = REC.CAMPAIGN_ID;              
+        BEGIN    
+            UPDATE_CAMPAIGN_SMS_RATE(CAMP_ID.CAMPAIGN_ID,AVERAGE_RATE_PERIOD);
+            
+            SELECT IS_OPEN_ENDED INTO CAMP_IS_OPEN_ENDED FROM ADM_CAMPAIGNS WHERE CAMPAIGN_ID = CAMP_ID.CAMPAIGN_ID;              
             IF  CAMP_IS_OPEN_ENDED = 1 THEN
                 UPDATE H_CAMPAIGN_STATISTICS
-                SET TOTAL_COUNT = (SELECT COUNT(1) FROM B2B_OTF_DIAL_INFO WHERE CAMPAIGN_ID = REC.CAMPAIGN_ID)
-                WHERE CAMPAIGN_ID = REC.CAMPAIGN_ID;
+                SET TOTAL_COUNT = (SELECT COUNT(1) FROM B2B_OTF_DIAL_INFO WHERE CAMPAIGN_ID = CAMP_ID.CAMPAIGN_ID)
+                WHERE CAMPAIGN_ID = CAMP_ID.CAMPAIGN_ID;
             END IF;
-            
-            COMMIT;
-
-            UPDATE H_CAMPAIGN_STATISTICS
-               SET LAST_SENDING_RATE = RATE
-             WHERE RATE > 0;
-
-            COMMIT;
         EXCEPTION
             WHEN OTHERS
             THEN
-                DBMS_OUTPUT.PUT_LINE (SQLERRM);
-                --RAISE;
+                LOG_SP_EXCEPTION('UPDATE_CAMPAIGN_SMS_RATES', SQLCODE, SQLERRM);
+                V_EXCEPTION_MESSAGE := SQLERRM ();
+                DBMS_OUTPUT.PUT_LINE (
+                    'Exception =>' || V_EXCEPTION_MESSAGE);
+                RAISE;
                 NULL;
         END;
     END LOOP;
 
     COMMIT;
+
 END;
