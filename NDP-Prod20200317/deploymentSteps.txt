@@ -1,0 +1,25 @@
+Contents=>
+1- BugFix: fixing retrial mechanism on QuotaWS timeout.
+2- LogEnhancement: in NDPAdmin webservice.
+
+Deployment Steps:
+
+Database:
+1- Run the below DMLs:
+INSERT INTO ADM_SYSTEM_PROPERTIES (GROUP_NAME,KEY,VALUE,DESCRIPTION) VALUES ('SMPP_ADAPTER','QUOTA_WEBSERVICE_TIMEOUT','3600000','Time to keep retrying to reach quota webservice in case of timeout.(in minutes)');
+
+INSERT INTO ADM_SYSTEM_PROPERTIES (GROUP_NAME,KEY,VALUE,DESCRIPTION) VALUES ('SMPP_ADAPTER','QUOTA_WEBSERVICE_TIMEOUT_SLEEP_TIME','30000','Time to sleep before retrying to reach the quota webservice in case of timeout.(in seconds)');
+
+System Components:
+1- SMSEngine (machine 83):
+	- backup ndp-Common.jar by renaming to ndp-Common.jar.<date>
+	- backup smpp-adapter.jar by renaming to smpp-adapter.jar.<date>
+	- backup sms-broker-core.jar by renaming to sms-broker-core.jar.<date>
+	- copy new jars (ndp-Common.jar, smpp-adapter.jar, sms-broker-core.jar) into SMSEngine lib folder. Make sure the names match the old ones.
+	- restart engine.
+	- repeat above steps on machine 82.
+2- NDPAdmin webservice (machine 83)
+	- backup ndp-Common.jar by renaming to ndp-Common.jar.<date>
+	- copy new jars ndp-Common.jar into NDPAdmin lib folder. Make sure the name matchs the old one.
+	- restart webservice.
+	- repeat above steps on machine 82.
