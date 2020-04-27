@@ -1,0 +1,29 @@
+Contents=>
+1- BugFix: campaign with $ special character doesn't sent.
+2- BugFix: No smsc account for campaign.
+
+Deployment Steps:
+
+System Components:
+1- SMSEngine (machine 83):
+	- backup ndp-Common.jar by renaming to ndp-Common.jar.<date>
+	- backup smpp-adapter.jar by renaming to smpp-adapter.jar.<date>
+	- backup sms-broker-core.jar by renaming to sms-broker-core.jar.<date>
+	- copy new jars (ndp-Common.jar, smpp-adapter.jar, sms-broker-core.jar) into SMSEngine lib folder. Make sure the names match the old ones.
+	- add the property "shutdown-campaigns-interval= 500000" into application.properties file.
+	- restart engine.
+	- repeat above steps on machine 82.
+	
+2- NDPCampHandler (machine 83):
+	- backup ndp-Common.jar by renaming to ndp-Common.jar.<date>
+	- backup ndpCampaignhandler.jar by renaming to ndpCampaignhandler.jar.<date>
+	- copy new jars (ndp-Common.jar, ndpCampaignhandler.jar) into CampaignHandler lib folder. Make sure the names match the old ones.
+	- restart engine.
+	- repeat above steps on machine 82.
+	
+3- NDPOpenCampHandler (machine 83)
+	- backup ndp-Common.jar by renaming to ndp-Common.jar.<date>
+	- backup ndpOpenCampaignhandler.jar by renaming to ndpOpenCampaignhandler.jar.<date>
+	- copy new jars (ndp-Common.jar, ndpOpenCampaignhandler.jar) into OpenCampaignHandler lib folder. Make sure the names match the old ones.
+	- restart engine.
+	- repeat above steps on machine 82.
