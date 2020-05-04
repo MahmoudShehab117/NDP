@@ -8,3 +8,8 @@ System Components:
 	- add the property "shutdown-campaigns-with-empty-queues= 300000" into application.properties file.
 	- restart engine.
 	- repeat above steps on machine 82.
+
+2- Admin UI (machine 83):
+	- backup UI folder by renaming it folderName_<date>.
+	- copy the folder Admin_UI into UI directory. Make sure the name of the folder is the same of the old one.
+	- repeat above steps on machine 82.
