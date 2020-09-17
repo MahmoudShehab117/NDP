@@ -1,5 +1,15 @@
 Deployment Steps:
 
+SQL script: 
+1- Run the below script to purge the general SMS Queue
+
+	DECLARE
+           po_t dbms_aqadm.aq$_purge_options_t;
+	BEGIN
+            dbms_aqadm.purge_queue_table('QT_GENERAL_SMS', NULL, po_t);
+	END;
+
+
 System Components:
 1- SMSEngine (machine 83):
 	- backup smpp-adapter.jar by renaming to smpp-adapter.jar.<date>
