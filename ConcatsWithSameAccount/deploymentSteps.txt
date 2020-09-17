@@ -1,8 +1,0 @@
-Deployment Steps:
-
-System Components:
-1- SMSEngine (machine 83):
-	- backup sms-broker-core.jar by renaming to sms-broker-core.jar.<date>
-	- copy new jars (sms-broker-core.jar) into SMSEngine lib folder. Make sure the names match the old ones.
-	- restart engine.
-	- repeat above steps on machine 82.
