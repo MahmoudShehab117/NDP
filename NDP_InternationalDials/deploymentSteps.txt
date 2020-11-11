@@ -1,0 +1,24 @@
+
+Contents=>
+1- BugFix: Support international dials
+
+Deployment Steps:
+
+System Components:
+1- SMSEngine (machine 83):
+	- backup smpp-adapter.jar by renaming to smpp-adapter.jar.<date>
+	- copy new jar (smpp-adapter.jar) into SMSEngine lib folder. Make sure the names match the old ones.
+	- restart engine.
+	- repeat above steps on machine 82.
+	
+2- NDPCampHandler (machine 83):
+	- backup ndpCampaignhandler.jar by renaming to ndpCampaignhandler.jar.<date>
+	- copy new jars (ndpCampaignhandler.jar) into CampaignHandler lib folder. Make sure the names match the old ones.
+	- restart engine.
+	- repeat above steps on machine 82.
+	
+3- NDPOpenCampHandler (machine 83)
+	- backup ndpOpenCampaignhandler.jar by renaming to ndpOpenCampaignhandler.jar.<date>
+	- copy new jars (ndpOpenCampaignhandler.jar) into OpenCampaignHandler lib folder. Make sure the names match the old ones.
+	- restart engine.
+	- repeat above steps on machine 82.
