@@ -1,0 +1,1 @@
+Alter table COTA_USERS ADD Column PASSWORD varchar2(500 byte);
