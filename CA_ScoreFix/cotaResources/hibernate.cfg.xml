@@ -1,0 +1,141 @@
+<!-- <?xml version="1.0" encoding="utf-8"?> -->
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory name="">
+
+        <property name="hibernate.connection.driver_class">oracle.jdbc.OracleDriver</property>
+        <property name="hibernate.connection.password">COTA_DEV3</property>
+        <property name="hibernate.connection.url">jdbc:oracle:thin:@10.0.20.38:1521/orclpdb</property>
+        <property name="hibernate.connection.username">COTA_DEV3</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.Oracle12cDialect</property>
+        <!--        <property name="hibernate.connection.datasource">jdbc/COTA-DS</property> -->
+
+
+        <!--Arabic Encoding Properties -->
+        <property name="hibernate.connection.CharSet">utf8</property>
+        <property name="hibernate.connection.characterEncoding">utf8</property>
+        <property name="hibernate.connection.useUnicode">true</property>
+        <property name="hibernate.connection.defaultNChar">true</property>
+        <!--End Of Arabic Encoding Properties -->
+        <property name="hibernate.c3p0.min_size">1</property>
+        <property name="hibernate.c3p0.max_size">2</property>
+        <property name="hibernate.c3p0.timeout">5</property>
+        <property name="hibernate.c3p0.max_statements">10</property>
+        <property name="hibernate.c3p0.idle_test_period">50</property>
+        <property name="hibernate.c3p0.validate ">true</property>
+        <property name="hibernate.c3p0.acquire_increment">1</property>
+
+        <property name="hibernate.search.autoregister_listeners">false</property>
+        <property name="show_sql">true</property>
+
+        <!-- disable hibernate 5 enhanced id generators -->
+        <property name="hibernate.id.new_generator_mappings">false</property>
+
+        <mapping resource="com/asset/cota/core/xml/CaUnitsLk.hbm.xml" />
+        <mapping resource="com/asset/cota/core/xml/CaEmployee.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CotaGroupsLk.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CotaUsersGroupsLnk.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CotaUsersGroupsView.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CotaUsersJobs.hbm.xml" />
+        <mapping resource="com/asset/cota/core/xml/CotaUsers.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CotaEmployeeUnitsLnk.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CaEmployeeSkillsLnk.hbm.xml" />
+        <mapping resource="com/asset/cota/core/xml/CaAnswers.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CaSheetQuestions.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CaAnswerReason.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CaSkillSheetsLnk.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CaSkillSheetsRatesLnk.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CotaLookups.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CotaLookupTypes.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CaUnitCallTypesLnk.hbm.xml" />
+
+        <mapping
+            resource="com/asset/cota/core/xml/CotaSystemSettings.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CotaPrivilegesLk.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CotaNotificationChannels.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CotaNotificationTemplates.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CaObservations.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CaObservationsDetails.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CaObservationScoreTypes.hbm.xml" />
+
+        <mapping resource="com/asset/cota/core/xml/BarChart.hbm.xml" />
+        <mapping resource="com/asset/cota/core/xml/thresholds.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CFEEThreshold.hbm.xml" />
+        <mapping resource="com/asset/cota/core/xml/AllReasons.hbm.xml" />
+        <mapping resource="com/asset/cota/core/xml/SmcReasons.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/ReasonsAverageCalls.hbm.xml" />
+
+        <mapping
+            resource="com/asset/cota/core/xml/CxSaQueryLog.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CotaEntityPrivilegesLnk.hbm.xml" />
+        <mapping resource="com/asset/cota/core/xml/CotaJob.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CotaJobTypes.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CotaJobRecords.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CotaFileFields.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CotaNotificationRecipients.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CotaWorkingWindows.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CotaSchedulers.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CotaJobRecordsArchive.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CotaTemplateField.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CotaTemplates.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CaNASection.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/PfCategories.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/PfDistricts.hbm.xml" />
+        <mapping resource="com/asset/cota/core/xml/PfPlaces.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/PfPlacesCategoriesLnk.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/PfPlaceTelephone.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/AverageHandlingTime.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CotaUserRefrence.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CotaJobsUsers.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CotaBSCSCredentials.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CotaUserReport.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CotaUsersGroupsViewReport.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CotaUsersJobsReport.hbm.xml" />
+        <mapping
+            resource="com/asset/cota/core/xml/CotaFootPrint.hbm.xml" />
+    </session-factory>
+</hibernate-configuration>

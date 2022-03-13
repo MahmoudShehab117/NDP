@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn">
+	<Properties>
+		<Property name="basePath">./logs</Property>
+	</Properties>
+
+	<Appenders>
+		<!-- Cota-web appenders -->
+		<RollingFile name="cotaDebugAppender"
+			fileName="${basePath}/cota_debug.log"
+			filePattern="${basePath}/cota_debug_%d{yyyy-MM-dd}.log">
+			<PatternLayout
+				pattern="%-5d{dd MMM yyyy HH:mm:ss,SSS}  [] %m%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+			</Policies>
+		</RollingFile>
+
+		<RollingFile name="cotaErrorAppender"
+			fileName="${basePath}/cota_error.log"
+			filePattern="${basePath}/cota_error_%d{yyyy-MM-dd}.log">
+			<PatternLayout
+				pattern="-%m%n %-5d{dd MMM yyyy HH:mm:ss,SSS}" />
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+			</Policies>
+		</RollingFile>
+
+		<!-- ODSIntegration appenders -->
+		<RollingFile name="odsDebugAppender"
+			fileName="${basePath}/ODS/ods_debug.log"
+			filePattern="${basePath}/ODS/ods_debug_%d{yyyy-MM-dd}.log">
+			<PatternLayout
+				pattern="%-5d{dd MMM yyyy HH:mm:ss,SSS}  [] %m%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+			</Policies>
+		</RollingFile>
+
+		<RollingFile name="odsErrorAppender"
+			fileName="${basePath}/ODS/ods_error.log"
+			filePattern="${basePath}/ODS/ods_error_%d{yyyy-MM-dd}.log">
+			<PatternLayout
+				pattern="%-5d{dd MMM yyyy HH:mm:ss,SSS}  [] %m%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+			</Policies>
+		</RollingFile>
+
+		<!-- Notification appenders -->
+		<RollingFile name="notificationDebugAppender"
+			fileName="${basePath}/Notification/notification_debug.log"
+			filePattern="${basePath}/Notification/notification_debug_%d{yyyy-MM-dd}.log">
+			<PatternLayout
+				pattern="%-5d{dd MMM yyyy HH:mm:ss,SSS}  [] %m%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+			</Policies>
+		</RollingFile>
+
+		<RollingFile name="notificationErrorAppender"
+			fileName="${basePath}/Notification/notification_error.log"
+			filePattern="${basePath}/Notification/notification_error_%d{yyyy-MM-dd}.log">
+			<PatternLayout
+				pattern="-%m%n %-5d{dd MMM yyyy HH:mm:ss,SSS}" />
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+			</Policies>
+		</RollingFile>
+
+		<!-- TibcoIntegration appenders -->
+		<RollingFile name="tipcoDebugAppender"
+			fileName="${basePath}/Tibco/tibco_debug.log"
+			filePattern="${basePath}/Tibco/tibco_debug_%d{yyyy-MM-dd}.log">
+			<PatternLayout
+				pattern="%-5d{dd MMM yyyy HH:mm:ss,SSS}  [] %m%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+			</Policies>
+		</RollingFile>
+
+		<RollingFile name="tipcoErrorAppender"
+			fileName="${basePath}/Tibco/tibco_error.log"
+			filePattern="${basePath}/Tibco/tibco_error_%d{yyyy-MM-dd}.log">
+			<PatternLayout
+				pattern="-%m%n %-5d{dd MMM yyyy HH:mm:ss,SSS}" />
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+			</Policies>
+		</RollingFile>
+
+		<!-- Console appender -->
+		<Console name="console" target="SYSTEM_OUT">
+			<PatternLayout
+				pattern="%ll28d{dd MMM yyyy HH:mm:ss,SSS}  [] %m%n" />
+		</Console>
+
+		<!--Hibernate Appender -->
+		<RollingFile name="hibernateAppender"
+			fileName="${basePath}/hibernate/hibernate.log"
+			filePattern="${basePath}/hibernate/hibernate_%d{yyyy-MM-dd}.log">
+			<PatternLayout
+				pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] [%C{1}.%M] - %msg%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+			</Policies>
+		</RollingFile>
+		<RollingFile name="hibernateSQLAppender"
+			fileName="${basePath}/hibernate/hibernateSQL.log"
+			filePattern="${basePath}/hibernate/hibernateSQL_%d{yyyy-MM-dd}.log">
+			<PatternLayout
+				pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] [%C{1}.%M] - %msg%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+			</Policies>
+		</RollingFile>
+	</Appenders>
+
+	<Loggers>
+
+		<!--CotaWeb Loggers -->
+		<Logger name="cotaDebug" level="debug" additivity="false">
+			<appender-ref ref="cotaDebugAppender" level="debug" />
+			<!-- <appender-ref ref="console" level="debug" /> -->
+		</Logger>
+		<Logger name="cotaError" level="error" additivity="false">
+			<appender-ref ref="cotaErrorAppender" level="error" />
+			<!-- <appender-ref ref="console" level="error" /> -->
+		</Logger>
+
+		<!--ODS Loggers -->
+		<Logger name="odsDebug" level="debug" additivity="false">
+			<appender-ref ref="odsDebugAppender" level="debug" />
+			<!-- <appender-ref ref="console" level="debug" /> -->
+		</Logger>
+		<Logger name="odsError" level="error" additivity="false">
+			<appender-ref ref="odsErrorAppender" level="error" />
+			<!-- <appender-ref ref="console" level="error" /> -->
+		</Logger>
+
+		<!--Tibco Loggers -->
+		<Logger name="tipcoDebug" level="debug" additivity="false">
+			<appender-ref ref="tipcoDebugAppender" level="debug" />
+			<!-- <appender-ref ref="console" level="debug" /> -->
+		</Logger>
+		<Logger name="tipcoError" level="error" additivity="false">
+			<appender-ref ref="tipcoErrorAppender" level="error" />
+			<!-- <appender-ref ref="console" level="error" /> -->
+		</Logger>
+
+		<!--Notification Loggers -->
+		<Logger name="notificationDebug" level="debug"
+			additivity="false">
+			<appender-ref ref="notificationDebugAppender"
+				level="debug" />
+			<!-- <appender-ref ref="console" level="debug" /> -->
+		</Logger>
+		<Logger name="notificationError" level="error"
+			additivity="false">
+			<appender-ref ref="notificationErrorAppender"
+				level="error" />
+			<!-- <appender-ref ref="console" level="error" /> -->
+		</Logger>
+
+		<!-- Hibernate Logs -->
+		<!-- Log everything in hibernate -->
+		<Logger name="org.hibernate" level="info" additivity="false">
+			<AppenderRef ref="hibernateAppender" level="info" />
+		</Logger>
+
+		<!-- Log all SQL statements -->
+		<Logger name="org.hibernate.SQL" level="debug"
+			additivity="false">
+			<AppenderRef ref="hibernateSQLAppender" level="debug" />
+		</Logger>
+
+		<!--Root Logger -->
+		<Root level="INFO" additivity="false">
+			<appender-ref ref="console" level="debug" />
+			<appender-ref ref="cotaDebugAppender" level="debug" />
+			<appender-ref ref="cotaErrorAppender" level="error" />
+			<appender-ref ref="odsDebugAppender" level="debug" />
+			<appender-ref ref="odsErrorAppender" level="error" />
+			<appender-ref ref="tipcoDebugAppender" level="debug" />
+			<appender-ref ref="tipcoErrorAppender" level="error" />
+			<appender-ref ref="notificationDebugAppender"
+				level="debug" />
+			<appender-ref ref="notificationErrorAppender"
+				level="error" />
+			<AppenderRef ref="hibernateAppender" level="info" />
+			<AppenderRef ref="hibernateSQLAppender" level="debug" />
+		</Root>
+	</Loggers>
+</Configuration>
