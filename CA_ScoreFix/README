@@ -1,0 +1,25 @@
+1- Download the COTA-WEB.war file
+2- Download cotaResources directory
+3- Download cotalib directory
+
+4- create new directory with name cotalib inside the below path
+	%DOMAIN_HOME%\lib\
+	- DOMAIN_HOME% is the path of the weblogic target domain.
+	
+5- copy all jars files inside the new directory.
+
+
+6- create new directory with name cotaResources wherever you need.
+7- copy all downloaded resources files to it.
+8- change the values one by one for each file with the production configurations. 
+	(please don't replace this files from the old deployment)
+	
+9- add the full path of the new directory cotaResources in the weblogic class path.
+	- for windows: if the new directory created inside domain\lib, the below line should be added in startWebLogic.cmd file - line 118
+		set CLASSPATH=%CLASSPATH%;%DOMAIN_HOME%\lib\cotaResources
+	
+	- for unix: 
+		CLASSPATH=${CLASSPATH}:${DOMAIN_HOME}\lib\cotaResources
+	
+10- restart the weblogic
+11- deploy the new war (The war contains only ASSET jars without any configuration files).
