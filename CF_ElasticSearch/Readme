@@ -1,0 +1,13 @@
+1- Execute the sql scripts in the database script file.
+2- unrar the logging-service.rar file
+3- copy the extracted directory to the testing server
+4- change the database properties inside application.properties from config directory
+5- change log files path from log4j2.xml file in the config directory
+6- execute "chmod 777 control.sh"
+7- execute "./control.sh start"
+
+
+8 Add two new properties in Config.properties of the CF
+	Connect_Timeout=1000
+	Read_Timeout=1000
+9- deploy CF war file	
