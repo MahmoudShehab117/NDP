@@ -2,7 +2,7 @@
 --  DDL for Table LK_PARENT_PRODUCTS
 --------------------------------------------------------
 
-  CREATE TABLE "CHARGING_FLOWS_DEV"."LK_PARENT_PRODUCTS" 
+  CREATE TABLE "LK_PARENT_PRODUCTS" 
    (	"ID" NUMBER(30,0), 
 	"PRODUCT_NAME" VARCHAR2(400 BYTE), 
 	"PRODUCT_TYPE" NUMBER, 
