@@ -1,0 +1,10 @@
+please add the below lines in application.properties
+
+general.urls.postImsiListRequest=/EIR/whitelistPair
+general.postImsiList.maxSize=1
+
+
+then backup the old jars!!
+
+lib/eir-core-1.0.jar
+lib/eir-ntra-interface.jar
