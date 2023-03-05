@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="maven-antrun-" default="main">
+  <target name="main">
+    <delete file="E:\Projects\daily-app\code\daily-app-backend-service\target\classes/application.yml" />
+    <copy file="src/main/resources/application.qa.yml" tofile="E:\Projects\daily-app\code\daily-app-backend-service\target\classes/application.yml" />
+    <delete file="E:\Projects\daily-app\code\daily-app-backend-service\target\classes/application.test.yml" />
+    <delete file="E:\Projects\daily-app\code\daily-app-backend-service\target\classes/application.qa.yml" />
+  </target>
+</project>

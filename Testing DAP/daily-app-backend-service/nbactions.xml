@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>CUSTOM-clean install -DskipTeats</actionName>
+            <displayName>clean install -DskipTeats</displayName>
+            <goals>
+                <goal>clean</goal>
+                <goal>install</goal>
+                <goal>-DskipTeats</goal>
+            </goals>
+        </action>
+    </actions>
