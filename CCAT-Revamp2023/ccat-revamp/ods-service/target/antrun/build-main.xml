@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <delete file="E:\Projects\CCAT-Revamp-Backend\code\ccat-revamp\ods-service\target\classes/bootstrap.properties"/>
+  <copy file="src/main/resources/bootstrap.qa.properties" tofile="E:\Projects\CCAT-Revamp-Backend\code\ccat-revamp\ods-service\target\classes/bootstrap.properties"/>
+  <delete file="E:\Projects\CCAT-Revamp-Backend\code\ccat-revamp\ods-service\target\classes/bootstrap.test.properties"/>
+  <delete file="E:\Projects\CCAT-Revamp-Backend\code\ccat-revamp\ods-service\target\classes/bootstrap.qa.properties"/>
+  <delete file="E:\Projects\CCAT-Revamp-Backend\code\ccat-revamp\ods-service\target\classes/bootstrap.vodafone.properties"/>
+</target>
+</project>
