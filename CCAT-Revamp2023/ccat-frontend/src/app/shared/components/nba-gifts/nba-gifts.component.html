@@ -56,7 +56,7 @@
                         <div class="circle accept"><span class="icon-checkmark"></span></div>
                         <div class="title">Accept</div>
                     </div>
-                    <div [class]="disable ? 'disable' : null" class="item"
+                    <div *ngIf="!nbaInterfaceSelector" [class]="disable ? 'disable' : null" class="item"
                         (click)="respondToGift('reject', item.giftShortCode, item.giftSeqId )" id="nba-gift-3">
                         <div class="circle reject"><span class="icon-block"></span></div>
                         <div class="title">Reject</div>

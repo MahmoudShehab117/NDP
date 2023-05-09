@@ -48,7 +48,7 @@ export class NbaGiftsComponent implements OnInit {
     gifts: gifts[] = [];
     giftsCounter = new EventEmitter<number>();
     // items = [1, 2, 3];
-
+    nbaInterfaceSelector = JSON.parse(sessionStorage.getItem("nbaInterfaceSelector"))
     giftsSource$ = (msisdn) =>
         this.httpService
             .request({
@@ -125,7 +125,8 @@ export class NbaGiftsComponent implements OnInit {
         private router: Router
     ) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+    }
 
     respondToGift(type, code, giftSeqId , wlist ? :any) {
         this.closeModal.emit();

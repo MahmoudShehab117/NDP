@@ -29,6 +29,7 @@ export class SSOService {
                 this.validationService.setRegex(msisdnPattern, passwordPattern);
                 this.setRegaxLocally(msisdnPattern, passwordPattern);
                 this.setReportSearchPeriod(res.payload.reportDefaultSearchPeriod, res.payload.reportMaxSearchPeriod);
+                this.setNBAInterfaceSelection(res.payload.nbaInterfaceSelector);
             })
         );
     }
@@ -39,5 +40,8 @@ export class SSOService {
     setReportSearchPeriod(reportDefaultSearchPeriod, reportMaxSearchPeriod) {
         sessionStorage.setItem('reportDefaultSearchPeriod', reportDefaultSearchPeriod);
         sessionStorage.setItem('reportMaxSearchPeriod', reportMaxSearchPeriod);
+    }
+    setNBAInterfaceSelection(nbaInterfaceSelector: any) {
+        sessionStorage.setItem('nbaInterfaceSelector', nbaInterfaceSelector);
     }
 }
