@@ -195,4 +195,11 @@ public class Defines {
     public static final String W_LIST = "$wlist$";
     public static final String GIFT_SEQ_ID = "$giftSeqID$";
   }
+
+  public static final class HTTP_HEADERS {
+
+    public static final String X_SOURCE_SYSTEM = "X-Source-System";
+    public static final String X_SOURCE_IDENTITY_TOKEN = "X-Source-Identity-Token";
+
+  }
 }

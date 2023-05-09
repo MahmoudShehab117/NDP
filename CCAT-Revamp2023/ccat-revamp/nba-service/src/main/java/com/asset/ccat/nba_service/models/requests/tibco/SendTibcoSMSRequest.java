@@ -16,4 +16,11 @@ public class SendTibcoSMSRequest {
     public void setCustomerMarketingProduct(List<CustomerMarketingProduct> customerMarketingProduct) {
         this.customerMarketingProduct = customerMarketingProduct;
     }
+
+    @Override
+    public String toString() {
+        return "SendTibcoSMSRequest{" +
+            "customerMarketingProduct=" + customerMarketingProduct.toString() +
+            '}';
+    }
 }

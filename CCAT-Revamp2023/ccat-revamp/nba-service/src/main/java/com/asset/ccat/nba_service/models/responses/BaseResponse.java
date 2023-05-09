@@ -5,8 +5,6 @@
  */
 package com.asset.ccat.nba_service.models.responses;
 
-import com.asset.ccat.nba_service.models.shared.ServiceInfo;
-
 /**
  *
  * @author Mahmoud Shehab
@@ -16,7 +14,7 @@ public class BaseResponse<T> {
     private Integer statusCode;
     private String statusMessage;
     private Integer severity;
-    private ServiceInfo serviceInfo;
+    private String requestId;
     private T payload;
 
     public BaseResponse() {
@@ -29,11 +27,11 @@ public class BaseResponse<T> {
         this.payload = payload;
     }
 
-    public BaseResponse(Integer statusCode, String statusMessage, Integer severity, ServiceInfo serviceInfo, T payload) {
+    public BaseResponse(Integer statusCode, String statusMessage, Integer severity, String requestId, T payload) {
         this.statusCode = statusCode;
         this.statusMessage = statusMessage;
         this.severity = severity;
-        this.serviceInfo = serviceInfo;
+        this.requestId = requestId;
         this.payload = payload;
     }
 
@@ -69,12 +67,17 @@ public class BaseResponse<T> {
         this.payload = payload;
     }
 
-    public ServiceInfo getServiceInfo() {
-        return serviceInfo;
+    public String getRequestId() {
+        return requestId;
     }
 
-    public void setServiceInfo(ServiceInfo serviceInfo) {
-        this.serviceInfo = serviceInfo;
+    public void setRequestId(String requestId) {
+        this.requestId = requestId;
+    }
+
+    @Override
+    public String toString() {
+        return "BaseResponse{" + "statusCode=" + statusCode + ", statusMessage=" + statusMessage + ", severity=" + severity + ", payload=" + payload + '}';
     }
 
 }

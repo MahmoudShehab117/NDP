@@ -2,21 +2,16 @@ package com.asset.ccat.gateway.services;
 
 import com.asset.ccat.gateway.configurations.Properties;
 import com.asset.ccat.gateway.defines.Defines;
-import com.asset.ccat.gateway.models.admin.SystemConfigurationModel;
-import com.asset.ccat.gateway.models.requests.admin.system_config.UpdateConfigurationsRequest;
-import com.asset.ccat.gateway.proxy.ServiceRefreshProxy;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-
 import com.asset.ccat.gateway.exceptions.GatewayException;
 import com.asset.ccat.gateway.logger.CCATLogger;
 import com.asset.ccat.gateway.models.requests.admin.system_config.GetAllConfigurationsRequest;
+import com.asset.ccat.gateway.models.requests.admin.system_config.UpdateConfigurationsRequest;
 import com.asset.ccat.gateway.models.responses.admin.system_config.GetAllConfigurationsResponse;
+import com.asset.ccat.gateway.proxy.ServiceRefreshProxy;
 import com.asset.ccat.gateway.proxy.SystemConfigProxy;
-
-import java.util.List;
-import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 @Component
 public class SystemConfigService {

@@ -96,10 +96,10 @@ public class AdmSystemPropertiesDao {
                         .append(" AND ").append(DatabaseStructs.ADM_SYSTEM_PROPERTIES.TYPE).append(" = 4 ");
                 retrieveSysPropByProfilePasswords = queryBuilder.toString();
             }
-            return jdbcTemplate.query(retrieveSysPropByProfileAndLabelQuery, systemPropertiesPasswordsExtractor, profile, label);
+            return jdbcTemplate.query(retrieveSysPropByProfilePasswords, systemPropertiesPasswordsExtractor, profile, label);
         } catch (Exception e) {
-            CCATLogger.DEBUG_LOGGER.error("error while executing: " + retrieveSysPropByProfileAndLabelQuery);
-            CCATLogger.ERROR_LOGGER.error("error while executing: " + retrieveSysPropByProfileAndLabelQuery, e);
+            CCATLogger.DEBUG_LOGGER.error("error while executing: " + retrieveSysPropByProfilePasswords);
+            CCATLogger.ERROR_LOGGER.error("error while executing: " + retrieveSysPropByProfilePasswords, e);
             throw new ConfigServerException(ErrorCodes.ERROR.DATABASE_ERROR, Defines.SEVERITY.ERROR, e.getMessage());
         }
     }

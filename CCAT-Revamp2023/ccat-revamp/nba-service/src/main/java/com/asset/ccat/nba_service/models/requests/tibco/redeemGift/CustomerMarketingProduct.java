@@ -49,5 +49,15 @@ public class CustomerMarketingProduct {
     public void setParts(Parts parts) {
         this.parts = parts;
     }
+
+    @Override
+    public String toString() {
+        return "CustomerMarketingProduct{" +
+            "id=" + id +
+            ", type='" + type + '\'' +
+            ", category=" + category +
+            ", parts=" + parts +
+            '}';
+    }
 }
 

@@ -27,4 +27,12 @@ public class Category {
     public void setListHierarchyId(String listHierarchyId) {
         this.listHierarchyId = listHierarchyId;
     }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+            "value='" + value + '\'' +
+            ", listHierarchyId='" + listHierarchyId + '\'' +
+            '}';
+    }
 }
