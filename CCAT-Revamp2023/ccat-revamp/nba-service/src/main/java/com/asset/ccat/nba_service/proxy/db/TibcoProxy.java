@@ -31,7 +31,7 @@ public class TibcoProxy {
   public GetAllTibcoGiftsResponse getAllTibcoGifts(String URL) throws NBAException {
     GetAllTibcoGiftsResponse response;
     try {
-      CCATLogger.DEBUG_LOGGER.info("Start getAllTibcoGifts Get All Tibco Gifts URL : " + URL);
+      CCATLogger.INTERFACE_LOGGER.info("Start getAllTibcoGifts Get All Tibco Gifts URL : " + URL);
       Mono<GetAllTibcoGiftsResponse> responseAsync = webClient.get()
           .uri(URL)
           .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
@@ -42,7 +42,7 @@ public class TibcoProxy {
           .accept(MediaType.APPLICATION_JSON)
           .acceptCharset(StandardCharsets.UTF_8)
           .exchangeToMono(clientResponse -> {
-            CCATLogger.DEBUG_LOGGER.info(
+            CCATLogger.INTERFACE_LOGGER.info(
                 "GetAllTibcoGifts Response Headers: " + clientResponse.headers().asHttpHeaders()
                     .toSingleValueMap());
             return clientResponse.bodyToMono(GetAllTibcoGiftsResponse.class);
@@ -62,8 +62,8 @@ public class TibcoProxy {
   public void redeemGift(RedeemTibcoGiftRequest redeemTibcoGiftRequest) throws NBAException {
     String URI = properties.getTibcoRedeemOfferUrl();
     try {
-      CCATLogger.DEBUG_LOGGER.info("Start Redeeming Tibco Gift URL : " + URI);
-      CCATLogger.DEBUG_LOGGER.info("Redeem Tibco Gift Request : " + redeemTibcoGiftRequest.toString());
+      CCATLogger.INTERFACE_LOGGER.info("Start Redeeming Tibco Gift URL : " + URI);
+      CCATLogger.INTERFACE_LOGGER.info("Redeem Tibco Gift Request : " + redeemTibcoGiftRequest.toString());
       webClient.post()
           .uri(URI)
           .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
@@ -75,7 +75,7 @@ public class TibcoProxy {
           .acceptCharset(StandardCharsets.UTF_8)
           .body(BodyInserters.fromValue(redeemTibcoGiftRequest))
           .exchangeToMono(clientResponse -> {
-            CCATLogger.DEBUG_LOGGER.info(
+            CCATLogger.INTERFACE_LOGGER.info(
                 "RedeemGift Response Headers: " + clientResponse.headers().asHttpHeaders()
                     .toSingleValueMap());
             return clientResponse.bodyToMono(Void.class);
@@ -94,8 +94,8 @@ public class TibcoProxy {
   public void sendSMSGift(SendTibcoSMSRequest sendTibcoSMSRequest) throws NBAException {
     String URI = properties.getTibcoSendSmsUrl();
     try {
-      CCATLogger.DEBUG_LOGGER.info("Start Sending Tibco SMS Gift URL : " + URI);
-      CCATLogger.DEBUG_LOGGER.info("Send Tibco SMS Request : " + sendTibcoSMSRequest.toString());
+      CCATLogger.INTERFACE_LOGGER.info("Start Sending Tibco SMS Gift URL : " + URI);
+      CCATLogger.INTERFACE_LOGGER.info("Send Tibco SMS Request : " + sendTibcoSMSRequest.toString());
       webClient.post()
           .uri(URI)
           .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
@@ -107,7 +107,7 @@ public class TibcoProxy {
           .acceptCharset(StandardCharsets.UTF_8)
           .body(BodyInserters.fromValue(sendTibcoSMSRequest))
           .exchangeToMono(clientResponse -> {
-            CCATLogger.DEBUG_LOGGER.info(
+            CCATLogger.INTERFACE_LOGGER.info(
                 "SendSMSGift Response Headers: " + clientResponse.headers().asHttpHeaders()
                     .toSingleValueMap());
             return clientResponse.bodyToMono(Void.class);
