@@ -9,8 +9,7 @@
     "build:asset-test": "npm run build -- --configuration asset-test --base-href /ccat/",
     "build:docker": "npm run build -- --configuration asset-test --base-href /ccat/ --deploy-url /ccat/",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "postbuild": "gulp compress"
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
@@ -51,8 +50,6 @@
     "@angular/compiler-cli": "~12.1.0",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
-    "gulp": "^4.0.2",
-    "gulp-gzip": "^1.4.2",
     "jasmine-core": "~3.7.0",
     "karma": "^6.3.19",
     "karma-chrome-launcher": "~3.1.0",
